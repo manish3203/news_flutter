@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:news_18/core/config/env_config.dart';
+import 'package:news_18/core/constants/app_constants.dart';
 import 'network_exceptions.dart';
 import 'network_info.dart';
 
@@ -9,10 +11,10 @@ class ApiClient {
   ApiClient({required this.networkInfo, String? baseUrl})
       : dio = Dio(
           BaseOptions(
-            baseUrl: baseUrl ?? 'https://api.yourapp.com',
-            connectTimeout: const Duration(seconds: 15),
-            receiveTimeout: const Duration(seconds: 15),
-            sendTimeout: const Duration(seconds: 15),
+            baseUrl: baseUrl ?? ApiConstants.baseUrl,
+            connectTimeout: ApiConstants.connectTimeout,
+            receiveTimeout: ApiConstants.receiveTimeout,
+            sendTimeout: ApiConstants.connectTimeout,
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
@@ -22,28 +24,29 @@ class ApiClient {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          // Attach auth token if needed
-          // options.headers['Authorization'] = 'Bearer $token';
+          // NewsAPI accepts the key as a query param (or X-Api-Key header).
+          options.queryParameters.putIfAbsent(
+            'apiKey',
+            () => EnvConfig.newsApiKey,
+          );
           return handler.next(options);
         },
-        onResponse: (response, handler) {
-          return handler.next(response);
-        },
-        onError: (DioException error, handler) {
-          return handler.next(error);
-        },
+        onResponse: (response, handler) => handler.next(response),
+        onError: (DioException error, handler) => handler.next(error),
       ),
     );
 
-    // Optional: log requests in debug mode
-    dio.interceptors.add(
-      LogInterceptor(
-        request: true,
-        requestBody: true,
-        responseBody: true,
-        error: true,
-      ),
-    );
+    assert(() {
+      dio.interceptors.add(
+        LogInterceptor(
+          request: true,
+          requestBody: true,
+          responseBody: true,
+          error: true,
+        ),
+      );
+      return true;
+    }());
   }
 
   Future<Response> get(

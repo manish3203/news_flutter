@@ -49,7 +49,7 @@ class SplashView extends GetView<SplashController> {
                   duration: const Duration(milliseconds: 700),
                   curve: Curves.easeOut,
                   child: const Text(
-                    'NewsNow.',
+                    'News18',
                     style: TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.w900,

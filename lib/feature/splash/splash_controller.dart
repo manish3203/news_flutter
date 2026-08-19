@@ -1,5 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+import 'package:news_18/app/routes/app_routes.dart';
 
 class SplashController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -28,17 +29,14 @@ class SplashController extends GetxController
   }
 
   Future<void> _runSequence() async {
-    // Title fades in at 0.3s
     await Future.delayed(const Duration(milliseconds: 300));
     showTitle.value = true;
 
-    // Subtitle fades in at 0.6s
     await Future.delayed(const Duration(milliseconds: 300));
     showSubtitle.value = true;
 
-    // Splash shown for 2.5s total, then navigate
     await Future.delayed(const Duration(milliseconds: 1900));
-    Get.offAllNamed('/home'); // change route name as needed
+    Get.offAllNamed(AppRoutes.home);
   }
 
   @override
