@@ -38,7 +38,7 @@ return Scaffold(
           Obx(
             () => IconButton(
               icon: Icon(
-                controller.isBookmarked.value
+                controller.isBookmarked
                     ? Icons.bookmark
                     : Icons.bookmark_border,
                 color: colors.onSurface,

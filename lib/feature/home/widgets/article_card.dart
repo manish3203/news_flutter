@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:news_18/data/models/article_model.dart';
+import 'package:news_18/feature/bookmark/bookmark_controller.dart';
 
 class ArticleCard extends StatelessWidget {
   final ArticleModel article;
@@ -87,6 +89,22 @@ class ArticleCard extends StatelessWidget {
                       style: TextStyle(fontSize: 13, color: Colors.grey[700]),
                     ),
                   ],
+                  const SizedBox(height: 4),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Obx(() {
+                      final bookmarkController = Get.find<BookmarkController>();
+                      final saved = bookmarkController.isBookmarked(article);
+                      return IconButton(
+                        visualDensity: VisualDensity.compact,
+                        icon: Icon(
+                          saved ? Icons.bookmark : Icons.bookmark_border,
+                          color: saved ? Theme.of(context).colorScheme.primary : Colors.grey[500],
+                        ),
+                        onPressed: () => bookmarkController.toggle(article),
+                      );
+                    }),
+                  ),
                 ],
               ),
             ),

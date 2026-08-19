@@ -1,5 +1,6 @@
 
 import 'package:get/get.dart';
+import 'package:news_18/feature/bookmark/bookmark_view.dart';
 import 'package:news_18/feature/details/article_details_binding.dart';
 import 'package:news_18/feature/details/article_details_page.dart';
 import 'package:news_18/feature/home/home_binding.dart';
@@ -29,6 +30,11 @@ class AppPages {
       page: () => const ArticleDetailPage(),
       binding: ArticleDetailBinding(),
       transition: Transition.rightToLeft,
+    ),
+
+    GetPage(
+      name: AppRoutes.bookmarks,
+      page: () => const BookmarksView(),
     ),
   ];
 }

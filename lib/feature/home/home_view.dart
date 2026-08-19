@@ -30,6 +30,19 @@ class HomeView extends GetView<HomeController> {
         ),
       ),
       body: Obx(() => _buildBody(context)),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: 0, // Home is always index 0 on this screen
+        onDestinationSelected: (index) {
+          if (index == 1) {
+            Get.toNamed(AppRoutes.bookmarks);
+          }
+        },
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.bookmark_border), selectedIcon: Icon(Icons.bookmark), label: 'Saved'),
+        ],
+      ),
+
     );
   }
 
