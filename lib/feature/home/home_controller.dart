@@ -93,5 +93,6 @@ class HomeController extends GetxController {
 
   Future<void> retry() => fetchNews(selectedCategory.value);
 
+  @override
   Future<void> refresh() => fetchNews(selectedCategory.value, isRefresh: true);
 }

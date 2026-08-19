@@ -18,7 +18,7 @@ return Scaffold(
     slivers: [
       SliverAppBar(
         pinned: true,
-        backgroundColor: colors.surface.withOpacity(0.9),
+        backgroundColor: colors.surface.withValues(alpha: 0.9),
         surfaceTintColor: Colors.transparent,
         elevation: 0,
 
@@ -68,7 +68,7 @@ return Scaffold(
                       ? Image.network(
                           article.urlToImage!,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(
+                          errorBuilder: (_, _, _) => Container(
                             color: Colors.grey[300],
                             child: const Icon(Icons.image_not_supported_outlined,
                                 size: 48),
