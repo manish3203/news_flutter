@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_18/app/routes/app_routes.dart';
 import 'package:news_18/feature/home/home_controller.dart';
 import 'package:news_18/feature/home/news_status.dart';
 
@@ -97,8 +98,7 @@ class HomeView extends GetView<HomeController> {
             return ArticleCard(
               article: article,
               onTap: () {
-                // Navigate to an article detail page here, e.g.:
-                // Get.to(() => ArticleDetailView(article: article));
+                Get.toNamed(AppRoutes.articleDetail, arguments: article);
               },
             );
           },
