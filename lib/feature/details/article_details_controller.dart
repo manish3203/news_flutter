@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:news_18/feature/bookmark/bookmark_controller.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../data/models/article_model.dart';
 
 class ArticleDetailController extends GetxController {
@@ -17,9 +18,8 @@ class ArticleDetailController extends GetxController {
   Future<void> shareArticle() async {
     final url = article.url;
     if (url != null && url.isNotEmpty) {
-      await Clipboard.setData(ClipboardData(text: url));
-      Get.snackbar('Copied', 'Article link copied to clipboard',
-          snackPosition: SnackPosition.BOTTOM);
+      await SharePlus.instance.share(ShareParams(uri: Uri.parse(url)));
+    
     } else {
       await Clipboard.setData(ClipboardData(text: article.title ?? ''));
       Get.snackbar('Copied', 'Article title copied to clipboard',
