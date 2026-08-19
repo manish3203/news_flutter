@@ -18,7 +18,7 @@ class AppTheme {
         error: AppColors.error,
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.surfaceLight.withOpacity(0.8),
+        backgroundColor: AppColors.surfaceLight.withValues(alpha: 0.8),
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         iconTheme: const IconThemeData(color: AppColors.textPrimaryLight),
@@ -88,10 +88,11 @@ class AppTheme {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         surface: AppColors.surfaceDark,
+        onSurface: AppColors.white,
         error: AppColors.error,
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.backgroundDark.withOpacity(0.8),
+        backgroundColor: AppColors.backgroundDark.withValues(alpha: 0.8),
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         iconTheme: const IconThemeData(color: AppColors.textPrimaryDark),
@@ -147,7 +148,7 @@ class AppTheme {
         bodySmall:
             AppTextStyle.bodySmall.copyWith(color: AppColors.textMutedDark),
       ),
-      iconTheme: const IconThemeData(color: AppColors.textSecondaryDark),
+      iconTheme: const IconThemeData(color: AppColors.white),
     );
   }
 }

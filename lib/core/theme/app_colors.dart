@@ -45,4 +45,6 @@ class AppColors {
   // Overlay
   static const Color overlayDark = Color(0xCC000000); // black/80
   static const Color overlayMid = Color(0x33000000);  // black/20
+
+  static const Color white = Color(0xFFFFFFFF); // white
 }

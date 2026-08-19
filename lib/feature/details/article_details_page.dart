@@ -10,39 +10,51 @@ class ArticleDetailPage extends GetView<ArticleDetailController> {
   @override
   Widget build(BuildContext context) {
     final article = controller.article;
+    final colors = Theme.of(context).colorScheme;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          // ---- Sticky header (back / bookmark / share) -----------------
-          SliverAppBar(
-            pinned: true,
-            backgroundColor: Colors.white.withOpacity(0.9),
-            elevation: 0,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black87),
-              onPressed: () => Get.back(),
-            ),
-            actions: [
-              Obx(
-                () => IconButton(
-                  icon: Icon(
-                    controller.isBookmarked.value
-                        ? Icons.bookmark
-                        : Icons.bookmark_border,
-                    color: Colors.black87,
-                  ),
-                  onPressed: controller.toggleBookmark,
-                ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.share_outlined, color: Colors.black87),
-                onPressed: controller.shareArticle,
-              ),
-              const SizedBox(width: 4),
-            ],
+return Scaffold(
+  backgroundColor: colors.surface,
+  body: CustomScrollView(
+    slivers: [
+      SliverAppBar(
+        pinned: true,
+        backgroundColor: colors.surface.withOpacity(0.9),
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+
+        iconTheme: IconThemeData(
+          color: colors.onSurface,
+        ),
+
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: colors.onSurface,
           ),
+          onPressed: () => Get.back(),
+        ),
+
+        actions: [
+          Obx(
+            () => IconButton(
+              icon: Icon(
+                controller.isBookmarked.value
+                    ? Icons.bookmark
+                    : Icons.bookmark_border,
+                color: colors.onSurface,
+              ),
+              onPressed: controller.toggleBookmark,
+            ),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.share_outlined,
+              color: colors.onSurface,
+            ),
+            onPressed: controller.shareArticle,
+          ),
+        ],
+      ),
 
           // ---- Hero image with gradient + category badge + title -------
           SliverToBoxAdapter(
@@ -71,8 +83,8 @@ class ArticleDetailPage extends GetView<ArticleDetailController> {
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
                         colors: [
-                          Colors.black.withOpacity(0.8),
-                          Colors.black.withOpacity(0.2),
+                          Colors.black.withValues(alpha: 0.8),
+                          Colors.black.withValues(alpha: 0.2),
                           Colors.transparent,
                         ],
                       ),
@@ -129,7 +141,7 @@ class ArticleDetailPage extends GetView<ArticleDetailController> {
                   CircleAvatar(
                     radius: 20,
                     backgroundColor:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                        Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
                     child: Text(
                       (article.author?.isNotEmpty == true
                               ? article.author![0]
